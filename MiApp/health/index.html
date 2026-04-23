@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Health Check</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Mono', monospace;
+      background: #0d0f14;
+      color: #e8eaf0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(52,211,153,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(52,211,153,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+    .badge-ok {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; gap: 16px;
+      background: rgba(52,211,153,0.08);
+      border: 1px solid rgba(52,211,153,0.25);
+      border-radius: 16px;
+      padding: 2rem 3rem;
+    }
+    .dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 16px #34d399;
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 16px #34d399; }
+      50% { opacity: 0.5; box-shadow: 0 0 6px #34d399; }
+    }
+    .ok-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: #34d399;
+      letter-spacing: -0.02em;
+    }
+    .meta {
+      position: relative; z-index: 1;
+      font-size: 0.78rem;
+      color: #6b7280;
+      text-align: center;
+      line-height: 1.9;
+    }
+    .meta span { color: #34d399; }
+    .back {
+      position: relative; z-index: 1;
+      color: #5b7fff;
+      text-decoration: none;
+      font-size: 0.78rem;
+      border: 1px solid rgba(91,127,255,0.25);
+      padding: 8px 20px;
+      border-radius: 99px;
+      transition: background 0.2s;
+    }
+    .back:hover { background: rgba(91,127,255,0.1); }
+  </style>
+</head>
+<body>
+  <div class="badge-ok">
+    <div class="dot"></div>
+    <span class="ok-text">OK</span>
+  </div>
+  <div class="meta">
+    status: <span>200 OK</span><br/>
+    service: <span>GestionUsuarios / IIS</span><br/>
+    timestamp: <span id="ts"></span>
+  </div>
+  <a class="back" href="../index.html">← Volver al panel</a>
+  <script>
+    document.getElementById('ts').textContent = new Date().toISOString();
+  </script>
+</body>
+</html>
